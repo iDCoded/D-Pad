@@ -7,6 +7,7 @@
 from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Style
+import webbrowser
 
 """ Variables """
 # region Variables
@@ -18,9 +19,14 @@ topbar_color = "#333842"
 textfield_color = "#333842"
 
 # Default font of the text field
+global text_font
 text_font = "Consolas"
 
 opened_file_address = ""
+
+# List of all available fonts
+global available_fonts
+available_fonts = {"Abel", "Andromeda", "Consolas", "Consequences", "Helvetica"}
 # endregion
 
 """ Functions """
@@ -44,6 +50,7 @@ def open_fileopener():
     print(f"Opened {opened_file_address}")
     if opened_file_address != "":
         open_file()
+        ROOT.title(f"{opened_file_address} | D-Pad")
 
 
 # Saves the file in the opened file address
@@ -60,8 +67,8 @@ def save_file():
 
 def display_file_address():
     sidebar_file_address_display = Label(sidebar_frame, text="lmfao")
-    sidebar_file_address_display.pack()
-    sidebar_file_address_display.config(text=opened_file_address)
+    sidebar_file_address_display.pack(pady=20)
+    sidebar_file_address_display.config(text=opened_file_address, wraplength=120)
 
 
 # Close out the application.
@@ -74,6 +81,30 @@ def exit():
 # Clears the text field
 def clear():
     text_field.delete(1.0, END)
+
+
+# Text Edit Functions
+
+# cut selected text
+def cut_text(e):
+    pass
+
+
+# copy selected text
+def copy_text(e):
+    pass
+
+
+# paste text
+def paste_text(e):
+    pass
+
+
+# Open the repository page
+# Link: [https://github.com/iDCoded/D-Pad]
+def open_github_repo():
+    repo_url = "https://github.com/iDCoded/D-Pad"
+    webbrowser.open_new_tab(repo_url)
 
 
 # endregion
@@ -90,14 +121,12 @@ MAIN_MENU = Menu(ROOT)
 # Creating Edit menu
 # Text editing options : Cut, Copy Paste.
 EDIT_MENU = Menu(ROOT)
+# Misc menu
+# Link to my GitHub Repo
+MISC_MENU = Menu(ROOT)
 
 # Config the Menu in ROOT
 ROOT.config(menu=MAIN_MENU)
-
-# Configuring button style
-STYLE.configure(
-    "TButton", font=("Andromeda", 12, "bold", "underline"), foreground="blue"
-)
 
 # Setting the Geometry of the Window
 # Default Size: 600 x 400
@@ -147,6 +176,19 @@ file_menu.add_command(label="Open a file", command=open_fileopener)
 file_menu.add_command(label="Save", command=save_file)
 file_menu.add_command(label="Exit", command=exit)
 
+# Edit Menu
+edit_menu = Menu(EDIT_MENU)
+MAIN_MENU.add_cascade(label="Edit", menu=edit_menu)
+edit_menu.add_command(label="Cut", command=cut_text)
+edit_menu.add_command(label="Copy", command=copy_text)
+edit_menu.add_command(label="Paste", command=paste_text)
+
+# Misc menu
+misc_menu = Menu(MISC_MENU)
+MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
+misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
+# Link GitHub Repo
+
 
 # Adding a label
 sidebar_label = Label(
@@ -181,7 +223,11 @@ clear_button.grid(row=0, column=1, padx=6, pady=2)
 # Text field.
 # Takes user input.
 text_field = Text(
-    text_field_frame, font=(text_font, "18"), bg=textfield_color, fg="white"
+    text_field_frame,
+    font=(text_font, "18"),
+    bg=textfield_color,
+    fg="white",
+    undo="true",
 )
 text_field.pack(fill="both")
 
