@@ -17,6 +17,9 @@ topbar_color = "#333842"
 # Color of the text field
 textfield_color = "#333842"
 
+# Default font of the text field
+text_font = "Consolas"
+
 opened_file_address = ""
 # endregion
 
@@ -25,6 +28,7 @@ opened_file_address = ""
 
 #  Prompts the File Explorer to select a text file (*.txt)
 def open_fileopener():
+    global opened_file_address
     opened_file_address = filedialog.askopenfilename(
         initialdir="C:\\Users\\vivek\\OneDrive\\Desktop\\DHRUV\\Docs",
         title="Open a Text File",
@@ -38,13 +42,26 @@ def open_fileopener():
         selected_file.close()
 
     print(f"Opened {opened_file_address}")
-    if opened_file_address != None:
+    if opened_file_address != "":
         open_file()
 
 
+# Saves the file in the opened file address
+def save_file():
+    global opened_file_address
+    opened_file_address = filedialog.askopenfilename(
+        initialdir="C:\\Users\\vivek\\OneDrive\\Desktop\\DHRUV\\Docs",
+        title="Save file as...",
+        filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
+    )
+    selected_file = open(opened_file_address, "w")
+    selected_file.write(text_field.get(1.0, END))
+
+
 def display_file_address():
-    sidebar_file_display = Label(sidebar_frame, text=opened_file_address)
-    sidebar_file_display.pack()
+    sidebar_file_address_display = Label(sidebar_frame, text="lmfao")
+    sidebar_file_address_display.pack()
+    sidebar_file_address_display.config(text=opened_file_address)
 
 
 # Close out the application.
@@ -52,6 +69,11 @@ def display_file_address():
 def exit():
     print("Quit")
     ROOT.quit()
+
+
+# Clears the text field
+def clear():
+    text_field.delete(1.0, END)
 
 
 # endregion
@@ -63,7 +85,11 @@ ROOT = Tk()
 STYLE = Style()
 
 # Creating a Main Menu
+# Save, Open, Exit
 MAIN_MENU = Menu(ROOT)
+# Creating Edit menu
+# Text editing options : Cut, Copy Paste.
+EDIT_MENU = Menu(ROOT)
 
 # Config the Menu in ROOT
 ROOT.config(menu=MAIN_MENU)
@@ -84,12 +110,12 @@ ROOT.geometry("600x400")
 ROOT.minsize(180, 90)
 
 # Setting the title of the window.
-ROOT.title("TK Text Editor")
+ROOT.title("D-Pad")
 
 # Ading an icon
 ROOT.iconbitmap("win-icon.ico")
 
-# configuring the base color of the applicaiton
+# configuring the base color of the application
 # color => #333842
 ROOT.configure(bg="#333842")
 
@@ -114,19 +140,29 @@ text_field_frame.pack()
 file_menu = Menu(MAIN_MENU)
 MAIN_MENU.add_cascade(label="File", menu=file_menu)
 # General File commands
-    # Open a file => open_fileopener()
-    # Exit => exit()
+# Open a file => open_fileopener()
+# Savve => save_file()
+# Exit => exit()
 file_menu.add_command(label="Open a file", command=open_fileopener)
+file_menu.add_command(label="Save", command=save_file)
 file_menu.add_command(label="Exit", command=exit)
 
+
 # Adding a label
-sidebar_label = Label(sidebar_frame, text="Sidebar", relief=RAISED, width=20)
+sidebar_label = Label(
+    sidebar_frame, text="Sidebar", relief=FLAT, width=20, bg=sidebar_color, fg="white"
+)
 sidebar_label.pack(pady=2)
 
 title_label = Label(
-    titlebar_frame, text="TK Text Editor", font=("abel", "12", "bold"), relief=RAISED
+    titlebar_frame,
+    text="D-Pad | Text Editor",
+    font=("abel", "12", "bold"),
+    relief=FLAT,
+    background=sidebar_color,
+    fg="white",
 )
-title_label.pack(pady=6, anchor=CENTER)
+title_label.pack(pady=6, anchor=CENTER, fill="x")
 
 # Create a button to open file opener
 openfile_button = Button(
@@ -139,13 +175,13 @@ openfile_button.grid(row=0, column=0, padx=8, pady=2)
 
 # Close window on click.
 # Terminates the program.
-close_window_button = Button(topbar_frame, height=1, text="Close", command=exit)
-close_window_button.grid(row=0, column=1, padx=6, pady=2)
+clear_button = Button(topbar_frame, height=1, text="Clear", command=clear)
+clear_button.grid(row=0, column=1, padx=6, pady=2)
 
 # Text field.
 # Takes user input.
 text_field = Text(
-    text_field_frame, font=("fira code", "18"), bg=textfield_color, fg="white"
+    text_field_frame, font=(text_font, "18"), bg=textfield_color, fg="white"
 )
 text_field.pack(fill="both")
 
