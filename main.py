@@ -22,6 +22,12 @@ textfield_color = "#333842"
 global text_font
 text_font = "Consolas"
 
+global text_field_content
+text_field_content = ""
+
+global selected_text
+selected_text = ""
+
 opened_file_address = ""
 
 # List of all available fonts
@@ -83,21 +89,34 @@ def clear():
     text_field.delete(1.0, END)
 
 
-# Text Edit Functions
+""" Text Operations """
+
+# Cut
+# Copy
+# Paste
 
 # cut selected text
-def cut_text(e):
-    pass
+def cut_text():
+    if text_field.selection_get():
+        selected_text = text_field.selection_get()
+        ROOT.clipboard_clear()
+        ROOT.clipboard_append(selected_text)
+        text_field.delete(SEL_FIRST, SEL_LAST)
 
 
 # copy selected text
-def copy_text(e):
-    pass
+def copy_text():
+    if text_field.selection_get():
+        selected_text = text_field.selection_get()
+        ROOT.clipboard_clear()
+        ROOT.clipboard_append(selected_text)
 
 
 # paste text
-def paste_text(e):
-    pass
+def paste_text():
+    pasted_text = ROOT.clipboard_get()
+    text_position = text_field.index(INSERT)
+    text_field.insert(text_position, pasted_text)
 
 
 # Open the repository page
@@ -163,7 +182,7 @@ topbar_frame = Frame(ROOT, bg=topbar_color, relief=FLAT)
 topbar_frame.pack(side=TOP, fill="x")
 
 text_field_frame = Frame(ROOT)
-text_field_frame.pack()
+text_field_frame.pack(fill="both")
 
 # Adding a Menu panel
 file_menu = Menu(MAIN_MENU)
@@ -230,6 +249,19 @@ text_field = Text(
     undo="true",
 )
 text_field.pack(fill="both")
+
+# Store the input into the
+# text_field
+text_field_content = StringVar(ROOT)
+text_field_content = text_field.get(1.0, END)
+
+# # Disable the save option
+# # Disable if the text field is empty.
+# if text_field_content == "":
+#     file_menu.entryconfig("Save", state="disabled")
+
+# if text_field_content != "":
+#     file_menu.entryconfig("Save", state="normal")
 
 # Running mainloop
 ROOT.mainloop()
