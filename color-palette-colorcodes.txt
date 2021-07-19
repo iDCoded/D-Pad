@@ -1,0 +1,30 @@
+Value/State: '#7FC1CA'
+
+Identifier: '#83AFE5'
+
+Global: '#9A93E1'
+
+Emphasis: '#D18EC2'
+
+Action Needed: '#DF8C8C'
+
+Special: '#F2C38F'
+
+Statement: '#DADA93'
+
+Type: '#A8CE93'
+
+Decoration 0: '#1E272C'
+
+Decoration 1: '#6A7D89'
+
+Decoration 2: '#556873'
+
+Decoration 3: '#898989'
+
+Default Back: '#445660'
+
+Trivial: '#899BA6'
+
+Default Text: '#C5D4DD'
+
