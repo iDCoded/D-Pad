@@ -1,4 +1,4 @@
-""" Making a basic Text App """
+""" D-Pad | Text Editor """
 """ TKinter """
 """ By: Dhruv """
 
@@ -135,7 +135,6 @@ def open_font_selector():
     global text_font
 
     def select_font():
-        print(f"Selected font: {selected_font.get()}")
         text_font = selected_font.get()
         text_field.config(font=(text_font))
 
@@ -221,16 +220,18 @@ MAIN_MENU.add_cascade(label="File", menu=file_menu)
 # Open a file => open_fileopener()
 # Savve => save_file()
 # Exit => exit()
-file_menu.add_command(label="Open a file", command=open_fileopener)
+file_menu.add_command(
+    label="Open a file", command=open_fileopener, accelerator="Ctrl + O"
+)
 file_menu.add_command(label="Save", command=save_file)
-file_menu.add_command(label="Exit", command=exit)
+file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
 # Edit Menu
 edit_menu = Menu(EDIT_MENU)
 MAIN_MENU.add_cascade(label="Edit", menu=edit_menu)
-edit_menu.add_command(label="Cut", command=cut_text)
-edit_menu.add_command(label="Copy", command=copy_text)
-edit_menu.add_command(label="Paste", command=paste_text)
+edit_menu.add_command(label="Cut", command=cut_text, accelerator="Ctrl + X")
+edit_menu.add_command(label="Copy", command=copy_text, accelerator="Ctrl + C")
+edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
 edit_menu.add_separator()
 edit_menu.add_command(label="Font..", command=open_font_selector)
 
@@ -240,6 +241,14 @@ MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
 
 # Link : {'https://github.com/iDCoded/D-Pad'}
 misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
+
+# Key Bindings
+
+# [CTRL-W] => Exit the application.
+ROOT.bind("<Control-w>", lambda x: exit())
+
+# [CTRL-O] => Open a file.
+ROOT.bind("<Control-o>", lambda x: open_fileopener())
 
 # Adding a label
 sidebar_label = Label(
