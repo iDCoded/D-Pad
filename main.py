@@ -5,8 +5,10 @@
 # Importing module
 # TKinter
 from tkinter import *
+from tkinter import font
 from tkinter import filedialog
-from tkinter.ttk import Style
+
+# from tkinter.ttk import Style
 import webbrowser
 
 """ Variables """
@@ -32,7 +34,9 @@ opened_file_address = ""
 
 # List of all available fonts
 global available_fonts
-available_fonts = {"Abel", "Andromeda", "Consolas", "Consequences", "Helvetica"}
+available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
+# {"Abel", "Andromeda", "Consolas", "Consequences", "Helvetica"}
+
 # endregion
 
 """ Functions """
@@ -126,13 +130,39 @@ def open_github_repo():
     webbrowser.open_new_tab(repo_url)
 
 
+# Open a Toplevel window for font selection.
+def open_font_selector():
+    global text_font
+
+    def select_font():
+        print(f"Selected font: {selected_font.get()}")
+        text_font = selected_font.get()
+        text_field.config(font=(text_font))
+
+    font_window = Toplevel()
+    font_window.title("Font")
+    # Set the Geometry of the window.
+    font_window.geometry("200x150")
+    font_window.minsize(200, 150)
+    font_window.maxsize(250, 200)
+
+    selected_font = StringVar(font_window)
+    # Set the first options as the initial menu for the dropdown.
+    selected_font.set(available_fonts[0])
+    # Selector for fonts
+    font_selection_drop = OptionMenu(font_window, selected_font, *available_fonts)
+    font_selection_drop.pack()
+
+    text_font = selected_font.get()
+
+    final_button = Button(font_window, text="Ok", command=select_font)
+    final_button.pack(side=RIGHT, anchor=SE)
+
+
 # endregion
 
 # Creating instance
 ROOT = Tk()
-
-# Creating a Style Object
-STYLE = Style()
 
 # Creating a Main Menu
 # Save, Open, Exit
@@ -201,13 +231,15 @@ MAIN_MENU.add_cascade(label="Edit", menu=edit_menu)
 edit_menu.add_command(label="Cut", command=cut_text)
 edit_menu.add_command(label="Copy", command=copy_text)
 edit_menu.add_command(label="Paste", command=paste_text)
+edit_menu.add_separator()
+edit_menu.add_command(label="Font..", command=open_font_selector)
 
 # Misc menu
 misc_menu = Menu(MISC_MENU)
 MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
-misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
-# Link GitHub Repo
 
+# Link : {'https://github.com/iDCoded/D-Pad'}
+misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
 
 # Adding a label
 sidebar_label = Label(
