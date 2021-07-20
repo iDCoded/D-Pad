@@ -158,6 +158,36 @@ def open_font_selector():
     final_button.pack(side=RIGHT, anchor=SE)
 
 
+# Right Click Popups
+
+# Sidebar RC
+def sidebar_popup(e):
+    sidebar_right_click.tk_popup(e.x_root, e.y_root)
+
+
+# Text Field RC
+def text_field_popup(e):
+    text_field_right_click.tk_popup(e.x_root, e.y_root)
+
+
+def collapse_sidebar():
+    # print(sidebar_pack_info)
+    sidebar_frame.pack_forget()
+
+
+def show_sidebar():
+    sidebar_frame.pack(fill=Y, side=LEFT)
+
+    titlebar_frame.pack_forget()
+    titlebar_frame.pack(side=TOP, fill="x")
+
+    topbar_frame.pack_forget()
+    topbar_frame.pack(side=TOP, fill=X)
+
+    text_field_frame.pack_forget()
+    text_field_frame.pack(fill=BOTH)
+
+
 # endregion
 
 # Creating instance
@@ -172,6 +202,9 @@ EDIT_MENU = Menu(ROOT)
 # Misc menu
 # Link to my GitHub Repo
 MISC_MENU = Menu(ROOT)
+
+# View Menu
+VIEW_MENU = Menu(ROOT)
 
 # Config the Menu in ROOT
 ROOT.config(menu=MAIN_MENU)
@@ -197,7 +230,7 @@ ROOT.iconbitmap("win-icon.ico")
 ROOT.configure(bg="#333842")
 
 # Creating a Frame
-sidebar_frame = Frame(ROOT, width=600, bg=sidebar_color, relief=SUNKEN, borderwidth=4)
+sidebar_frame = Frame(ROOT, width=1200, bg=sidebar_color, relief=SUNKEN, borderwidth=4)
 # Stretching the sidebar on Y-Axis
 sidebar_frame.pack(side=LEFT, fill="y")
 
@@ -211,7 +244,18 @@ topbar_frame = Frame(ROOT, bg=topbar_color, relief=FLAT)
 topbar_frame.pack(side=TOP, fill="x")
 
 text_field_frame = Frame(ROOT)
-text_field_frame.pack(fill="both")
+text_field_frame.pack(fill=BOTH)
+
+# Text field.
+# Takes user input.
+text_field = Text(
+    text_field_frame,
+    font=(text_font, "18"),
+    bg=textfield_color,
+    fg="white",
+    undo="true",
+)
+text_field.pack(fill="both")
 
 # Adding a Menu panel
 file_menu = Menu(MAIN_MENU)
@@ -235,12 +279,31 @@ edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
 edit_menu.add_separator()
 edit_menu.add_command(label="Font..", command=open_font_selector)
 
+view_menu = Menu(VIEW_MENU)
+MAIN_MENU.add_cascade(label="View", menu=view_menu)
+view_menu.add_command(label="Show Sidebar", command=show_sidebar)
+
 # Misc menu
 misc_menu = Menu(MISC_MENU)
 MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
 
 # Link : {'https://github.com/iDCoded/D-Pad'}
 misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
+
+# Right Click
+
+# Sidebar
+sidebar_right_click = Menu(ROOT, tearoff=False)
+sidebar_right_click.add_command(label="Collapse Sidebar", command=collapse_sidebar)
+
+# Text field
+text_field_right_click = Menu(ROOT, tearoff=False)
+text_field_right_click.add_command(label="Clear", command=clear)
+
+# binding button-3 (right-click)
+sidebar_frame.bind("<Button-3>", sidebar_popup)
+text_field.bind("<Button-3>", text_field_popup)
+
 
 # Key Bindings
 
@@ -280,16 +343,6 @@ openfile_button.grid(row=0, column=0, padx=8, pady=2)
 clear_button = Button(topbar_frame, height=1, text="Clear", command=clear)
 clear_button.grid(row=0, column=1, padx=6, pady=2)
 
-# Text field.
-# Takes user input.
-text_field = Text(
-    text_field_frame,
-    font=(text_font, "18"),
-    bg=textfield_color,
-    fg="white",
-    undo="true",
-)
-text_field.pack(fill="both")
 
 # Store the input into the
 # text_field
