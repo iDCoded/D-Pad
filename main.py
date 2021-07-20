@@ -258,7 +258,7 @@ text_field = Text(
 text_field.pack(fill="both")
 
 # Adding a Menu panel
-file_menu = Menu(MAIN_MENU)
+file_menu = Menu(MAIN_MENU, tearoff=False)
 MAIN_MENU.add_cascade(label="File", menu=file_menu)
 # General File commands
 # Open a file => open_fileopener()
@@ -271,7 +271,7 @@ file_menu.add_command(label="Save", command=save_file)
 file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
 # Edit Menu
-edit_menu = Menu(EDIT_MENU)
+edit_menu = Menu(EDIT_MENU, tearoff=False)
 MAIN_MENU.add_cascade(label="Edit", menu=edit_menu)
 edit_menu.add_command(label="Cut", command=cut_text, accelerator="Ctrl + X")
 edit_menu.add_command(label="Copy", command=copy_text, accelerator="Ctrl + C")
@@ -279,12 +279,12 @@ edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
 edit_menu.add_separator()
 edit_menu.add_command(label="Font..", command=open_font_selector)
 
-view_menu = Menu(VIEW_MENU)
+view_menu = Menu(VIEW_MENU, tearoff=False)
 MAIN_MENU.add_cascade(label="View", menu=view_menu)
 view_menu.add_command(label="Show Sidebar", command=show_sidebar)
 
 # Misc menu
-misc_menu = Menu(MISC_MENU)
+misc_menu = Menu(MISC_MENU, tearoff=False)
 MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
 
 # Link : {'https://github.com/iDCoded/D-Pad'}
