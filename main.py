@@ -13,12 +13,17 @@ import webbrowser
 
 """ Variables """
 # region Variables
+
+""" Color Theme """
+font_color = "#C5D4DD"
 # Color of the Sidebar
-sidebar_color = "#21252B"
+sidebar_color = "#1E272C"
 # Color of the topbar
 topbar_color = "#333842"
 # Color of the text field
 textfield_color = "#333842"
+
+default_bg = "#445660"
 
 # Default font of the text field
 global text_font
@@ -52,13 +57,12 @@ def open_fileopener():
     )
     # Opens the selected text file and inserts the text in the text field.
     def open_file():
-        selected_file = open(opened_file_address, "r")
-        file_text = selected_file.read()
-        text_field.insert(END, file_text)
-        selected_file.close()
+        with open(opened_file_address, "r") as selected_file:
+            file_text = selected_file.read()
+            text_field.insert(END, file_text)
 
-    print(f"Opened {opened_file_address}")
     if opened_file_address != "":
+        print(f"Opened {opened_file_address}")
         open_file()
         ROOT.title(f"{opened_file_address} | D-Pad")
 
@@ -71,14 +75,16 @@ def save_file():
         title="Save file as...",
         filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
     )
-    selected_file = open(opened_file_address, "w")
-    selected_file.write(text_field.get(1.0, END))
+    if opened_file_address != "":
+        with open(opened_file_address, "w") as selected_file:
+            selected_file.write(text_field.get(1.0, END))
 
 
 def display_file_address():
-    sidebar_file_address_display = Label(sidebar_frame, text="lmfao")
-    sidebar_file_address_display.pack(pady=20)
-    sidebar_file_address_display.config(text=opened_file_address, wraplength=120)
+    if opened_file_address != "":
+        sidebar_file_address_display = Label(sidebar_frame, text="")
+        sidebar_file_address_display.pack(pady=20)
+        sidebar_file_address_display.config(text=opened_file_address, wraplength=120)
 
 
 # Close out the application.
@@ -196,6 +202,7 @@ ROOT = Tk()
 # Creating a Main Menu
 # Save, Open, Exit
 MAIN_MENU = Menu(ROOT)
+
 # Creating Edit menu
 # Text editing options : Cut, Copy Paste.
 EDIT_MENU = Menu(ROOT)
@@ -227,7 +234,7 @@ ROOT.iconbitmap("win-icon.ico")
 
 # configuring the base color of the application
 # color => #333842
-ROOT.configure(bg="#333842")
+ROOT.configure(bg=default_bg)
 
 # Creating a Frame
 sidebar_frame = Frame(ROOT, width=1200, bg=sidebar_color, relief=SUNKEN, borderwidth=4)
@@ -325,7 +332,7 @@ title_label = Label(
     font=("abel", "12", "bold"),
     relief=FLAT,
     background=sidebar_color,
-    fg="white",
+    fg=font_color,
 )
 title_label.pack(pady=6, anchor=CENTER, fill="x")
 
