@@ -51,7 +51,7 @@ available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
 def open_fileopener():
     global opened_file_address
     opened_file_address = filedialog.askopenfilename(
-        initialdir="C:\\Users\\vivek\\OneDrive\\Desktop\\DHRUV\\Docs",
+        initialdir="/",
         title="Open a Text File",
         filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
     )
@@ -71,7 +71,7 @@ def open_fileopener():
 def save_file():
     global opened_file_address
     opened_file_address = filedialog.askopenfilename(
-        initialdir="C:\\Users\\vivek\\OneDrive\\Desktop\\DHRUV\\Docs",
+        initialdir="/",
         title="Save file as...",
         filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
     )
@@ -229,8 +229,8 @@ ROOT.minsize(180, 90)
 # Setting the title of the window.
 ROOT.title("D-Pad")
 
-# Ading an icon
-ROOT.iconbitmap("win-icon.ico")
+# # Ading an icon
+# ROOT.iconbitmap("win-icon.ico")
 
 # configuring the base color of the application
 # color => #333842
