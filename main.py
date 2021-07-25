@@ -129,6 +129,30 @@ def paste_text():
     text_field.insert(text_position, pasted_text)
 
 
+# Bold Format Option
+def text_bold():
+    # Un-bold the text
+    def remove_bold():
+        text_field.tag_remove("bold", SEL_FIRST, SEL_LAST)
+
+    # Make the text bold.
+    def add_bold():
+        text_field.tag_add("bold", SEL_FIRST, SEL_LAST)
+
+    bold_font = font.Font(text_field, text_field.cget("font"))
+    bold_font.configure(weight="bold")
+
+    text_field.tag_configure("bold", font=bold_font)
+
+    text_tags = text_field.tag_names(SEL_FIRST)
+
+    # Check if the 'BOLD' tag is there
+    if "bold" in text_tags:
+        remove_bold()
+    else:
+        add_bold()
+
+
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
 def open_github_repo():
@@ -350,6 +374,11 @@ openfile_button.grid(row=0, column=0, padx=8, pady=2)
 clear_button = Button(topbar_frame, height=1, text="Clear", command=clear)
 clear_button.grid(row=0, column=1, padx=6, pady=2)
 
+# Text Formatting
+# Bold & Italics
+
+bold_button = Button(topbar_frame, height=1, text="Bold", command=text_bold)
+bold_button.grid(row=0, column=2)
 
 # Store the input into the
 # text_field
