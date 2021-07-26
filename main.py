@@ -296,7 +296,9 @@ MAIN_MENU.add_cascade(label="File", menu=file_menu)
 # Savve => save_file()
 # Exit => exit()
 file_menu.add_command(
-    label="Open a file", command=open_fileopener, accelerator="Ctrl + O"
+    label="Open a file",
+    command=lambda: [open_fileopener(), display_file_address()],
+    accelerator="Ctrl + O",
 )
 file_menu.add_command(label="Save", command=save_file)
 file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
@@ -342,7 +344,7 @@ text_field.bind("<Button-3>", text_field_popup)
 ROOT.bind("<Control-w>", lambda x: exit())
 
 # [CTRL-O] => Open a file.
-ROOT.bind("<Control-o>", lambda x: open_fileopener())
+ROOT.bind("<Control-o>", lambda x: [open_fileopener(), display_file_address()])
 
 # Adding a label
 sidebar_label = Label(
