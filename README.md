@@ -23,8 +23,11 @@ So you will have a really smooth experience using this.
 - [x] Functioning Sidebar
 - [x] Keyboard [Shortcuts](https://github.com/iDCoded/D-Pad/wiki/Shortcuts)
 - [x] Font Selector
+- [ ] Text Formatting 
 - [ ] Text Color/Highlight
 - [ ] Customisable Application Themes
+	
+--- 
 	
 # Contribution 
 
