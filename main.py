@@ -10,6 +10,7 @@ from tkinter import filedialog
 
 # from tkinter.ttk import Style
 import webbrowser
+import os
 
 """ Variables """
 # region Variables
@@ -64,7 +65,8 @@ def open_fileopener():
     if opened_file_address != "":
         print(f"Opened {opened_file_address}")
         open_file()
-        ROOT.title(f"{opened_file_address} | D-Pad")
+        file_name = os.path.basename(opened_file_address)
+        ROOT.title(f"{file_name} | D-Pad")
 
 
 # Saves the file in the opened file address
@@ -91,7 +93,7 @@ def display_file_address():
 # ROOT.quit()
 def exit():
     print("Quit")
-    ROOT.quit()
+    ROOT.destroy()
 
 
 # Clears the text field
@@ -219,181 +221,188 @@ def show_sidebar():
 
 
 # endregion
+if __name__ == "__main__":
 
-# Creating instance
-ROOT = Tk()
+    # Creating instance
+    ROOT = Tk()
 
-# Creating a Main Menu
-# Save, Open, Exit
-MAIN_MENU = Menu(ROOT)
+    # Creating a Main Menu
+    # Save, Open, Exit
+    MAIN_MENU = Menu(ROOT)
 
-# Creating Edit menu
-# Text editing options : Cut, Copy Paste.
-EDIT_MENU = Menu(ROOT)
-# Misc menu
-# Link to my GitHub Repo
-MISC_MENU = Menu(ROOT)
+    # Creating Edit menu
+    # Text editing options : Cut, Copy Paste.
+    EDIT_MENU = Menu(ROOT)
+    # Misc menu
+    # Link to my GitHub Repo
+    MISC_MENU = Menu(ROOT)
 
-# View Menu
-VIEW_MENU = Menu(ROOT)
+    # View Menu
+    VIEW_MENU = Menu(ROOT)
 
-# Config the Menu in ROOT
-ROOT.config(menu=MAIN_MENU)
+    # Config the Menu in ROOT
+    ROOT.config(menu=MAIN_MENU)
 
-# Setting the Geometry of the Window
-# Default Size: 600 x 400
+    # Setting the Geometry of the Window
+    # Default Size: 600 x 400
 
-ROOT.geometry("600x400")
+    ROOT.geometry("600x400")
 
-# Setting minsize and maxsize
-# minsize = 90 x 180
+    # Setting minsize and maxsize
+    # minsize = 90 x 180
 
-ROOT.minsize(180, 90)
+    ROOT.minsize(180, 90)
 
-# Setting the title of the window.
-ROOT.title("D-Pad")
+    # Setting the title of the window.
+    ROOT.title("D-Pad")
 
-# # Ading an icon
-# ROOT.iconbitmap("win-icon.ico")
+    # # Ading an icon
+    # ROOT.iconbitmap("win-icon.ico")
 
-# configuring the base color of the application
-# color => #333842
-ROOT.configure(bg=default_bg)
+    # configuring the base color of the application
+    # color => #333842
+    ROOT.configure(bg=default_bg)
 
-# Creating a Frame
-sidebar_frame = Frame(ROOT, width=2400, bg=sidebar_color, relief=SUNKEN, borderwidth=4)
-# Stretching the sidebar on Y-Axis
-sidebar_frame.pack(side=LEFT, fill="y")
+    # Creating a Frame
+    sidebar_frame = Frame(
+        ROOT, width=2400, bg=sidebar_color, relief=SUNKEN, borderwidth=4
+    )
+    # Stretching the sidebar on Y-Axis
+    sidebar_frame.pack(side=LEFT, fill=BOTH)
 
-# Title bar
-titlebar_frame = Frame(ROOT, bg=sidebar_color, relief=FLAT)
-titlebar_frame.pack(side=TOP, fill="x")
+    # Title bar
+    titlebar_frame = Frame(ROOT, bg=sidebar_color, relief=FLAT)
+    titlebar_frame.pack(side=TOP, fill="x")
 
-# Topbar
-topbar_frame = Frame(ROOT, bg=topbar_color, relief=FLAT)
-# stretching the topbar on the X-Axis
-topbar_frame.pack(side=TOP, fill="x")
+    # Topbar
+    topbar_frame = Frame(ROOT, bg=topbar_color, relief=FLAT)
+    # stretching the topbar on the X-Axis
+    topbar_frame.pack(side=TOP, fill="x")
 
-text_field_frame = Frame(ROOT)
-text_field_frame.pack(fill=BOTH)
+    text_field_frame = Frame(ROOT)
+    text_field_frame.pack(fill=BOTH)
 
-# Text field.
-# Takes user input.
-text_field = Text(
-    text_field_frame,
-    font=(text_font, "18"),
-    bg=textfield_color,
-    fg="white",
-    undo="true",
-)
-text_field.pack(fill="both")
+    # Text field.
+    # Takes user input.
+    text_field = Text(
+        text_field_frame,
+        font=(text_font, "18"),
+        bg=textfield_color,
+        fg="white",
+        undo="true",
+    )
+    text_field.pack(fill="both")
 
-# Adding a Menu panel
-file_menu = Menu(MAIN_MENU, tearoff=False)
-MAIN_MENU.add_cascade(label="File", menu=file_menu)
-# General File commands
-# Open a file => open_fileopener()
-# Savve => save_file()
-# Exit => exit()
-file_menu.add_command(
-    label="Open a file",
-    command=lambda: [open_fileopener(), display_file_address()],
-    accelerator="Ctrl + O",
-)
-file_menu.add_command(label="Save", command=save_file)
-file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
+    # Adding a Menu panel
+    file_menu = Menu(MAIN_MENU, tearoff=False)
+    MAIN_MENU.add_cascade(label="File", menu=file_menu)
+    # General File commands
+    # Open a file => open_fileopener()
+    # Savve => save_file()
+    # Exit => exit()
+    file_menu.add_command(
+        label="Open a file",
+        command=lambda: [open_fileopener(), display_file_address()],
+        accelerator="Ctrl + O",
+    )
+    file_menu.add_command(label="Save", command=save_file)
+    file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
-# Edit Menu
-edit_menu = Menu(EDIT_MENU, tearoff=False)
-MAIN_MENU.add_cascade(label="Edit", menu=edit_menu)
-edit_menu.add_command(label="Cut", command=cut_text, accelerator="Ctrl + X")
-edit_menu.add_command(label="Copy", command=copy_text, accelerator="Ctrl + C")
-edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
-edit_menu.add_separator()
-edit_menu.add_command(label="Font..", command=open_font_selector)
+    # Edit Menu
+    edit_menu = Menu(EDIT_MENU, tearoff=False)
+    MAIN_MENU.add_cascade(label="Edit", menu=edit_menu)
+    edit_menu.add_command(label="Cut", command=cut_text, accelerator="Ctrl + X")
+    edit_menu.add_command(label="Copy", command=copy_text, accelerator="Ctrl + C")
+    edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
+    edit_menu.add_separator()
+    edit_menu.add_command(label="Font..", command=open_font_selector)
 
-view_menu = Menu(VIEW_MENU, tearoff=False)
-MAIN_MENU.add_cascade(label="View", menu=view_menu)
-view_menu.add_command(label="Show Sidebar", command=show_sidebar)
+    view_menu = Menu(VIEW_MENU, tearoff=False)
+    MAIN_MENU.add_cascade(label="View", menu=view_menu)
+    view_menu.add_command(label="Show Sidebar", command=show_sidebar)
 
-# Misc menu
-misc_menu = Menu(MISC_MENU, tearoff=False)
-MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
+    # Misc menu
+    misc_menu = Menu(MISC_MENU, tearoff=False)
+    MAIN_MENU.add_cascade(label="Misc.", menu=misc_menu)
 
-# Link : {'https://github.com/iDCoded/D-Pad'}
-misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
+    # Link : {'https://github.com/iDCoded/D-Pad'}
+    misc_menu.add_command(label="GitHub Repo", command=open_github_repo)
 
-# Right Click
+    # Right Click
 
-# Sidebar
-sidebar_right_click = Menu(ROOT, tearoff=False)
-sidebar_right_click.add_command(label="Collapse Sidebar", command=collapse_sidebar)
+    # Sidebar
+    sidebar_right_click = Menu(ROOT, tearoff=False)
+    sidebar_right_click.add_command(label="Collapse Sidebar", command=collapse_sidebar)
 
-# Text field
-text_field_right_click = Menu(ROOT, tearoff=False)
-text_field_right_click.add_command(label="Clear", command=clear)
+    # Text field
+    text_field_right_click = Menu(ROOT, tearoff=False)
+    text_field_right_click.add_command(label="Clear", command=clear)
 
-# binding button-3 (right-click)
-sidebar_frame.bind("<Button-3>", sidebar_popup)
-text_field.bind("<Button-3>", text_field_popup)
+    # binding button-3 (right-click)
+    sidebar_frame.bind("<Button-3>", sidebar_popup)
+    text_field.bind("<Button-3>", text_field_popup)
 
+    # Key Bindings
 
-# Key Bindings
+    # [CTRL-W] => Exit the application.
+    ROOT.bind("<Control-w>", lambda x: exit())
 
-# [CTRL-W] => Exit the application.
-ROOT.bind("<Control-w>", lambda x: exit())
+    # [CTRL-O] => Open a file.
+    ROOT.bind("<Control-o>", lambda x: [open_fileopener(), display_file_address()])
 
-# [CTRL-O] => Open a file.
-ROOT.bind("<Control-o>", lambda x: [open_fileopener(), display_file_address()])
+    # Adding a label
+    sidebar_label = Label(
+        sidebar_frame,
+        text="Sidebar",
+        relief=FLAT,
+        width=20,
+        bg=sidebar_color,
+        fg="white",
+    )
+    sidebar_label.pack(pady=2)
 
-# Adding a label
-sidebar_label = Label(
-    sidebar_frame, text="Sidebar", relief=FLAT, width=20, bg=sidebar_color, fg="white"
-)
-sidebar_label.pack(pady=2)
+    title_label = Label(
+        titlebar_frame,
+        text="D-Pad | Text Editor",
+        font=("abel", "12", "bold"),
+        relief=FLAT,
+        background=sidebar_color,
+        fg=font_color,
+    )
+    title_label.pack(pady=6, anchor=CENTER, fill="x")
 
-title_label = Label(
-    titlebar_frame,
-    text="D-Pad | Text Editor",
-    font=("abel", "12", "bold"),
-    relief=FLAT,
-    background=sidebar_color,
-    fg=font_color,
-)
-title_label.pack(pady=6, anchor=CENTER, fill="x")
+    # Create a button to open file opener
+    openfile_button = Button(
+        topbar_frame,
+        height=1,
+        text="Open a file",
+        command=lambda: [open_fileopener(), display_file_address()],
+    )
+    openfile_button.grid(row=0, column=0, padx=8, pady=2)
 
-# Create a button to open file opener
-openfile_button = Button(
-    topbar_frame,
-    height=1,
-    text="Open a file",
-    command=lambda: [open_fileopener(), display_file_address()],
-)
-openfile_button.grid(row=0, column=0, padx=8, pady=2)
+    # Close window on click.
+    # Terminates the program.
+    clear_button = Button(topbar_frame, height=1, text="Clear", command=clear)
+    clear_button.grid(row=0, column=1, padx=6, pady=2)
 
-# Close window on click.
-# Terminates the program.
-clear_button = Button(topbar_frame, height=1, text="Clear", command=clear)
-clear_button.grid(row=0, column=1, padx=6, pady=2)
+    # Text Formatting
+    # Bold & Italics
 
-# Text Formatting
-# Bold & Italics
+    bold_button = Button(topbar_frame, height=1, text="Bold", command=text_bold)
+    bold_button.grid(row=0, column=2)
 
-bold_button = Button(topbar_frame, height=1, text="Bold", command=text_bold)
-bold_button.grid(row=0, column=2)
+    # Store the input into the
+    # text_field
+    text_field_content = StringVar(ROOT)
+    text_field_content = text_field.get(1.0, END)
 
-# Store the input into the
-# text_field
-text_field_content = StringVar(ROOT)
-text_field_content = text_field.get(1.0, END)
+    # # Disable the save option
+    # # Disable if the text field is empty.
+    # if text_field_content == "":
+    #     file_menu.entryconfig("Save", state="disabled")
 
-# # Disable the save option
-# # Disable if the text field is empty.
-# if text_field_content == "":
-#     file_menu.entryconfig("Save", state="disabled")
+    # if text_field_content != "":
+    #     file_menu.entryconfig("Save", state="normal")
 
-# if text_field_content != "":
-#     file_menu.entryconfig("Save", state="normal")
-
-# Running mainloop
-ROOT.mainloop()
+    # Running mainloop
+    ROOT.mainloop()
