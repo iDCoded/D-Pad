@@ -261,7 +261,7 @@ ROOT.title("D-Pad")
 ROOT.configure(bg=default_bg)
 
 # Creating a Frame
-sidebar_frame = Frame(ROOT, width=1200, bg=sidebar_color, relief=SUNKEN, borderwidth=4)
+sidebar_frame = Frame(ROOT, width=2400, bg=sidebar_color, relief=SUNKEN, borderwidth=4)
 # Stretching the sidebar on Y-Axis
 sidebar_frame.pack(side=LEFT, fill="y")
 
