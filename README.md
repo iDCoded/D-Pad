@@ -33,7 +33,7 @@ So you will have a really smooth experience using this.
 
 **You**, my friend, are totally free to review the source code and contribute to this project, after all, this is what open-source means.
 	
-#### Read the [**Contributing**](https://github.com/iDCoded/D-Pad/blob/main/CONTRIBUTING.md) guidelines.
+#### Read the [**Contributing**](https://github.com/iDCoded/D-Pad/blob/main/GitFiles/CONTRIBUTING.md) guidelines.
 
 # 💖 Support
 	
