@@ -3,7 +3,7 @@
 # D-Pad
 
 <p align="center"> Lightweight Text Editor with minimal features.</p>
-<p align="center" > >>> 📣 This app is currently under active development <<< </p>
+<p align="center" > ⚠️ >>> 📣 This app is currently under active development <<< ⚠️</p>
 
 ## Why do you need this?
  
