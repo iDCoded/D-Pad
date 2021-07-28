@@ -157,8 +157,8 @@ def text_bold():
 
 def italicize():
     def remove_italics():
-        text_field.tag_remove("italics", SEL_FIRST, SEL_LAST)
-
+        text_field.tag_remove("italic", SEL_FIRST, SEL_LAST)
+	
     def add_italics():
         text_field.tag_add("italic", SEL_FIRST, SEL_LAST)
 
