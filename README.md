@@ -3,7 +3,7 @@
 # D-Pad
 
 <p align="center"> Lightweight Text Editor with minimal features.</p>
-<p align="center" > >>> 📣 This app is currently under active development <<< </p>
+<p align="center" > ⚠️ >>> 📣 This app is currently under active development <<< ⚠️</p>
 
 ## Why do you need this?
  
@@ -23,19 +23,36 @@ So you will have a really smooth experience using this.
 - [x] Functioning Sidebar
 - [x] Keyboard [Shortcuts](https://github.com/iDCoded/D-Pad/wiki/Shortcuts)
 - [x] Font Selector
+- [x] Text Formatting 
 - [ ] Text Color/Highlight
 - [ ] Customisable Application Themes
+	
+--- 
 	
 # Contribution 
 
 **You**, my friend, are totally free to review the source code and contribute to this project, after all, this is what open-source means.
+	
+#### Read the [**Contributing**](https://github.com/iDCoded/D-Pad/blob/main/GitFiles/CONTRIBUTING.md) guidelines.
 
 # 💖 Support
 	
 ♥ The best way you can me is by giving my project a ⭐**STAR**⭐.
 	
 ---
+# Download
 
+The First version of the app has been released! 
+
+### Download & Using
+- Go to the [Releases](https://github.com/iDCoded/D-Pad/releases/tag/v0) Page and download the `.exe` file 
+    - [Quick Download](https://github.com/iDCoded/D-Pad/releases/download/v0/D-Pad.exe)
+- Tada! You can now use the Application.
+
+Do not forget to STAR project, if you liked it. 
+
+---
+    
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=iDCoded&repo=D-Pad&theme=onedark)](https://github.com/iDCoded/D-Pad)
 	
 #### Made with 💟 and Python. 
