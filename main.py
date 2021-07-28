@@ -155,6 +155,26 @@ def text_bold():
         add_bold()
 
 
+def italicize():
+    def remove_italics():
+        text_field.tag_remove("italic", SEL_FIRST, SEL_LAST)
+
+    def add_italics():
+        text_field.tag_add("italic", SEL_FIRST, SEL_LAST)
+
+    italic_font = font.Font(text_field, text_field.cget("font"))
+    italic_font.configure(slant="italic")
+
+    text_field.tag_configure("italic", font=italic_font)
+
+    text_tags = text_field.tag_names(SEL_FIRST)
+
+    if "italic" in text_tags:
+        remove_italics()
+    else:
+        add_italics()
+
+
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
 def open_github_repo():
@@ -390,6 +410,9 @@ if __name__ == "__main__":
 
     bold_button = Button(topbar_frame, height=1, text="Bold", command=text_bold)
     bold_button.grid(row=0, column=2)
+
+    italics_button = Button(topbar_frame, height=1, text="Italics", command=italicize)
+    italics_button.grid(row=0, column=3)
 
     # Store the input into the
     # text_field
