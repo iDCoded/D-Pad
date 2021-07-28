@@ -153,6 +153,46 @@ def text_bold():
         add_bold()
 
 
+def italicize():
+    def remove_italics():
+        text_field.tag_remove("italic", SEL_FIRST, SEL_LAST)
+
+    def add_italics():
+        text_field.tag_add("italic", SEL_FIRST, SEL_LAST)
+
+    italic_font = font.Font(text_field, text_field.cget("font"))
+    italic_font.configure(slant="italic")
+
+    text_field.tag_configure("italic", font=italic_font)
+
+    text_tags = text_field.tag_names(SEL_FIRST)
+
+    if "italic" in text_tags:
+        remove_italics()
+    else:
+        add_italics()
+
+
+def underline_text():
+    def add_underline():
+        text_field.tag_add("underline", SEL_FIRST, SEL_LAST)
+
+    def remove_underline():
+        text_field.tag_remove("underline", SEL_FIRST, SEL_LAST)
+
+    under_text = font.Font(text_field, text_field.cget("font"))
+    under_text.configure(underline=True)
+
+    text_field.tag_configure("underline", font=under_text)
+
+    text_tags = text_field.tag_names(SEL_FIRST)
+
+    if "underline" in text_tags:
+        remove_underline()
+    else:
+        add_underline()
+
+
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
 def open_github_repo():
