@@ -158,7 +158,7 @@ def text_bold():
 def italicize():
     def remove_italics():
         text_field.tag_remove("italic", SEL_FIRST, SEL_LAST)
-	
+
     def add_italics():
         text_field.tag_add("italic", SEL_FIRST, SEL_LAST)
 
@@ -454,7 +454,7 @@ if __name__ == "__main__":
 
     # Running mainloop
     ROOT.mainloop()
-=======
+
 # Creating instance
 ROOT = Tk()
 
@@ -640,4 +640,3 @@ text_field_content = text_field.get(1.0, END)
 
 # Running mainloop
 ROOT.mainloop()
->>>>>>> Stashed changes
