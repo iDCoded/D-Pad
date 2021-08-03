@@ -27,21 +27,16 @@ textfield_color = "#333842"
 default_bg = "#445660"
 
 # Default font of the text field
-global text_font
 text_font = "Consolas"
 
-global text_field_content
 text_field_content = ""
 
-global selected_text
 selected_text = ""
 
 opened_file_address = ""
 
 # List of all available fonts
-global available_fonts
 available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
-# {"Abel", "Andromeda", "Consolas", "Consequences", "Helvetica"}
 
 # endregion
 
