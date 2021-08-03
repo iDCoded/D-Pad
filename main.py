@@ -47,6 +47,12 @@ available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
 
 """ Functions """
 # region Functions
+def check_text_file():
+    if ".txt" in file_name:
+        return True
+    else:
+        return False
+
 
 #  Prompts the File Explorer to select a text file (*.txt)
 def open_fileopener():
@@ -56,17 +62,25 @@ def open_fileopener():
         title="Open a Text File",
         filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
     )
+
     # Opens the selected text file and inserts the text in the text field.
     def open_file():
-        with open(opened_file_address, "r") as selected_file:
-            file_text = selected_file.read()
-            text_field.insert(END, file_text)
+        try:
+            with open(opened_file_address, "r") as selected_file:
+                file_text = selected_file.read()
+                text_field.insert(END, file_text)
+        except Exception:
+            print("Oops! There was a problem opening that file")
 
     if opened_file_address != "":
-        print(f"Opened {opened_file_address}")
-        open_file()
+        global file_name
         file_name = os.path.basename(opened_file_address)
-        ROOT.title(f"{file_name} | D-Pad")
+        open_file()
+        if ".txt" in file_name:
+            ROOT.title(f"{file_name} | D-Pad")
+            print(f"Opened {opened_file_address} [{file_name}]")
+        else:
+            print("No text file selected")
 
 
 # Saves the file in the opened file address
@@ -84,9 +98,15 @@ def save_file():
 
 def display_file_address():
     if opened_file_address != "":
-        sidebar_file_address_display = Label(sidebar_frame, text="")
+        global sidebar_file_address_display
+        sidebar_file_address_display = Label(
+            sidebar_frame, text=opened_file_address, wraplength=120
+        )
         sidebar_file_address_display.pack(pady=20)
-        sidebar_file_address_display.config(text=opened_file_address, wraplength=120)
+
+
+def clear_sidebar():
+    sidebar_file_address_display.destroy()
 
 
 # Close out the application.
@@ -373,6 +393,7 @@ if __name__ == "__main__":
     # Sidebar
     sidebar_right_click = Menu(ROOT, tearoff=False)
     sidebar_right_click.add_command(label="Collapse Sidebar", command=collapse_sidebar)
+    sidebar_right_click.add_command(label="Clear", command=clear_sidebar)
 
     # Text field
     text_field_right_click = Menu(ROOT, tearoff=False)
