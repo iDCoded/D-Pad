@@ -1,6 +1,6 @@
 """ D-Pad | Text Editor """
 """ TKinter """
-""" By: Dhruv """
+""" By: Dhruv and ygz213"""
 
 # Importing module
 # TKinter
@@ -325,6 +325,9 @@ if __name__ == "__main__":
 
     # Setting the title of the window.
     ROOT.title("D-Pad")
+
+    # Runs program fullscreen
+    ROOT.state('zoomed')
 
     # # Ading an icon
     # ROOT.iconbitmap("win-icon.ico")
