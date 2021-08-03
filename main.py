@@ -81,14 +81,29 @@ def open_fileopener():
 # Saves the file in the opened file address
 def save_file():
     global opened_file_address
-    opened_file_address = filedialog.askopenfilename(
-        initialdir="/",
-        title="Save file as...",
-        filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
+
+    if opened_file_address == "":
+        file = filedialog.asksaveasfile(
+            initialdir="/",
+            title="Save file...",
+            filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
     )
-    if opened_file_address != "":
+        opened_file_address = file.name
+        file_name = os.path.basename(opened_file_address)
+        if ".txt" in file_name:
+            ROOT.title(f"{file_name} | D-Pad")
+            print(f"Opened {file_name} [{opened_file_address}]")
+        else:
+            print("No text file selected")
+
         with open(opened_file_address, "w") as selected_file:
             selected_file.write(text_field.get(1.0, END))
+
+    else:
+        with open(opened_file_address, "w") as selected_file:
+            selected_file.write(text_field.get(1.0, END))
+
+    display_file_address()
 
 
 def display_file_address():
