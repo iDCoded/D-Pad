@@ -78,7 +78,7 @@ def open_fileopener():
         open_file()
         if ".txt" in file_name:
             ROOT.title(f"{file_name} | D-Pad")
-            print(f"Opened {opened_file_address} [{file_name}]")
+            print(f"Opened {file_name} [{opened_file_address}]")
         else:
             print("No text file selected")
 
@@ -469,6 +469,9 @@ if __name__ == "__main__":
         topbar_frame, height=1, text="Underline", command=underline_text
     )
     underline_button.grid(row=0, column=4)
+
+    sidebar_collapse_button = Button(sidebar_frame, text="<<", command=collapse_sidebar)
+    sidebar_collapse_button.pack(anchor=SW)
 
     # Store the input into the
     # text_field
