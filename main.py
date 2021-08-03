@@ -106,6 +106,29 @@ def save_file():
     display_file_address()
 
 
+def save_file_as():
+    global opened_file_address
+
+    file = filedialog.asksaveasfile(
+        initialdir="/",
+        title="Save file as...",
+        filetypes=(("Text files", "*.txt"), ("All Files", ("*.*"))),
+    )
+
+    opened_file_address = file.name
+    file_name = os.path.basename(opened_file_address)
+    if ".txt" in file_name:
+        ROOT.title(f"{file_name} | D-Pad")
+        print(f"Opened {file_name} [{opened_file_address}]")
+    else:
+        print("No text file selected")
+
+    with open(opened_file_address, "w") as selected_file:
+        selected_file.write(text_field.get(1.0, END))
+
+    display_file_address()
+
+
 def display_file_address():
     if opened_file_address != "":
         global sidebar_file_address_display
@@ -389,6 +412,7 @@ if __name__ == "__main__":
         accelerator="Ctrl + O",
     )
     file_menu.add_command(label="Save", command=save_file)
+    file_menu.add_command(label="Save As..", command=save_file_as)
     file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
     # Edit Menu
