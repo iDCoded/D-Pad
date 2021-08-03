@@ -98,12 +98,11 @@ def save_file():
 
         with open(opened_file_address, "w") as selected_file:
             selected_file.write(text_field.get(1.0, END))
+        display_file_address()
 
     else:
         with open(opened_file_address, "w") as selected_file:
             selected_file.write(text_field.get(1.0, END))
-
-    display_file_address()
 
 
 def save_file_as():
