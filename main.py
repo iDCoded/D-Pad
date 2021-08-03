@@ -106,7 +106,17 @@ def display_file_address():
 
 
 def clear_sidebar():
-    sidebar_file_address_display.destroy()
+    for labels in sidebar_frame.children.values():
+        labels.pack_forget()
+    sidebar_label = Label(
+        sidebar_frame,
+        text="Sidebar",
+        relief=FLAT,
+        width=20,
+        bg=sidebar_color,
+        fg="white",
+    )
+    sidebar_label.pack(pady=2)
 
 
 # Close out the application.
