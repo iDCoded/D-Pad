@@ -42,9 +42,7 @@ So you will have a really smooth experience using this.
 ---
 # Download
 
-The First version of the app has been released! 
-
-### Download & Using
+### Download & Usage
 - Go to the [Releases](https://github.com/iDCoded/D-Pad/releases) Page and download the `.exe` file 
     - [Quick Download](https://github.com/iDCoded/D-Pad/releases/download/v1.1.1/D-Pad-v1.1.1.exe)
 - Tada! You can now use the Application.
