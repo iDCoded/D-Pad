@@ -412,6 +412,8 @@ if __name__ == "__main__":
     )
     file_menu.add_command(label="Save", command=save_file)
     file_menu.add_command(label="Save As..", command=save_file_as)
+    file_menu.add_separator()
+    file_menu.add_command(label='Save & Exit', command=lambda:[save_file(), exit()])
     file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
     # Edit Menu
