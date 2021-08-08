@@ -262,6 +262,8 @@ def open_font_selector():
     selected_font = StringVar(font_window)
     # Set the first options as the initial menu for the dropdown.
     selected_font.set(available_fonts[0])
+    fonts_label = Label(font_window, text='Select a Font: ')
+    fonts_label.pack()
     # Selector for fonts
     font_selection_drop = OptionMenu(font_window, selected_font, *available_fonts)
     font_selection_drop.pack()
