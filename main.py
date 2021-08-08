@@ -128,6 +128,8 @@ def clear_sidebar():
     )
     sidebar_label.pack(pady=2)
 
+    sidebar_collapse_button = Button(sidebar_frame, text="<<", command=collapse_sidebar)
+    sidebar_collapse_button.pack(anchor=SW)
 
 # Close out the application.
 # ROOT.quit()
