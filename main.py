@@ -142,6 +142,33 @@ def exit():
 def clear():
     text_field.delete(1.0, END)
 
+def open_settings():
+    # Window Options
+    settings_window = Toplevel()
+    settings_window.title('D-Pad Settings')
+
+    settings_window.minsize(200, 150)
+    settings_window.minsize(250, 200)
+
+    # Font selection
+    font_label = Label(settings_window, text='Select a Font: ')
+    font_label.pack(side=LEFT, anchor=W)
+    font_button = Button(settings_window, text='Font...', command=open_font_selector)
+    font_button.pack(side=LEFT, anchor=W)
+
+    font_size_label = Label(settings_window, text='Set Font Size: ')
+    font_size_label.pack(side=LEFT, anchor=W)
+
+    selected_font_size = StringVar()
+    font_size_entry = Entry(settings_window, textvariable=selected_font_size)
+    font_size_entry.pack(side=LEFT, anchor=W)
+
+    def apply_font_size():
+        text_field.config(font=(text_font, selected_font_size.get()))
+
+    apply_font_button = Button(settings_window, text='Okay', command=apply_font_size)
+    apply_font_button.pack(side=BOTTOM, anchor=SE)
+
 
 """ Text Operations """
 
@@ -394,6 +421,8 @@ if __name__ == "__main__":
     )
     file_menu.add_command(label="Save", command=save_file)
     file_menu.add_command(label="Save As..", command=save_file_as)
+    file_menu.add_separator()
+    file_menu.add_command(label='Settings...', accelerator='Ctrl + ,', command=open_settings)
     file_menu.add_separator()
     file_menu.add_command(label='Save & Exit', command=lambda:[save_file(), exit()])
     file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
