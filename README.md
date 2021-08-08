@@ -17,7 +17,7 @@ So you will have a really smooth experience using this.
 	
 # Features
 - [x] Basic Text Editing
-- [x] Text Operations: ** Cut, Copy & Paste**
+- [x] Text Operations: **Cut, Copy & Paste**
 - [x] Open & Save Files
 - [x] Menu Items
 - [x] Functioning Sidebar
