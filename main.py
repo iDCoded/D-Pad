@@ -4,18 +4,18 @@
 
 # Importing module
 # TKinter
-from tkinter import *
-from tkinter import font
-from tkinter import filedialog
 
 # from tkinter.ttk import Style
-import webbrowser
-import os
 
 """ Variables """
 # region Variables
 
 """ Color Theme """
+from tkinter import *
+from tkinter import font
+from tkinter import filedialog
+import webbrowser
+import os
 font_color = "#C5D4DD"
 # Color of the Sidebar
 sidebar_color = "#1E272C"
@@ -44,6 +44,8 @@ available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
 # region Functions
 
 #  Prompts the File Explorer to select a text file (*.txt)
+
+
 def open_fileopener():
     global opened_file_address
     opened_file_address = filedialog.askopenfilename(
@@ -133,6 +135,8 @@ def clear_sidebar():
 
 # Close out the application.
 # ROOT.quit()
+
+
 def exit():
     print("Quit")
     ROOT.destroy()
@@ -141,6 +145,7 @@ def exit():
 # Clears the text field
 def clear():
     text_field.delete(1.0, END)
+
 
 def open_settings():
     # Window Options
@@ -177,6 +182,8 @@ def open_settings():
 # Paste
 
 # cut selected text
+
+
 def cut_text():
     if text_field.selection_get():
         selected_text = text_field.selection_get()
@@ -264,8 +271,30 @@ def underline_text():
         add_underline()
 
 
+def highlight_text():
+    highlight_color = '#FFFF00'
+
+    def add_highlight():
+        text_field.tag_add('highlight', SEL_FIRST, SEL_LAST)
+
+    def remove_highlight():
+        text_field.tag_add('highlight', SEL_FIRST, SEL_LAST)
+
+    highlighted_text = font.Font(text_field, text_field.cget('font'))
+
+    text_field.tag_configure('highlight', font=highlighted_text)
+    text_field.tag_config('highlight', background=highlight_color, foreground="white")
+    text_tags = text_field.tag_names(SEL_FIRST)
+
+    if 'highlight' in text_tags:
+        remove_highlight()
+    else:
+        add_highlight()
+
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
+
+
 def open_github_repo():
     repo_url = "https://github.com/iDCoded/D-Pad"
     webbrowser.open_new_tab(repo_url)
@@ -424,7 +453,7 @@ if __name__ == "__main__":
     file_menu.add_separator()
     file_menu.add_command(label='Settings...', accelerator='Ctrl + ,', command=open_settings)
     file_menu.add_separator()
-    file_menu.add_command(label='Save & Exit', command=lambda:[save_file(), exit()])
+    file_menu.add_command(label='Save & Exit', command=lambda: [save_file(), exit()])
     file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
     # Edit Menu
@@ -518,6 +547,9 @@ if __name__ == "__main__":
         topbar_frame, height=1, text="Underline", command=underline_text
     )
     underline_button.grid(row=0, column=4)
+
+    highlight_button = Button(topbar_frame, text='Highlight', command=highlight_text)
+    highlight_button.grid(row=0, column=5)
 
     sidebar_collapse_button = Button(sidebar_frame, text="<<", command=collapse_sidebar)
     sidebar_collapse_button.pack(anchor=SW)
