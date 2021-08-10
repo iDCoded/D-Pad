@@ -7,8 +7,6 @@
 
 # from tkinter.ttk import Style
 
-""" Variables """
-# region Variables
 
 """ Color Theme """
 from tkinter import *
@@ -16,6 +14,7 @@ from tkinter import font
 from tkinter import filedialog
 import webbrowser
 import os
+
 font_color = "#C5D4DD"
 # Color of the Sidebar
 sidebar_color = "#1E272C"
@@ -59,7 +58,7 @@ def open_fileopener():
         try:
             with open(opened_file_address, "r") as selected_file:
                 file_text = selected_file.read()
-                text_field.insert(END, file_text)
+                text_field.insert("end", file_text)
         except Exception:
             print("Oops! There was a problem opening that file")
 
@@ -82,7 +81,7 @@ def save_file():
         save_file_as()
     else:
         with open(opened_file_address, "w") as selected_file:
-            selected_file.write(text_field.get(1.0, END))
+            selected_file.write(text_field.get(1.0, "end"))
 
 
 def save_file_as():
@@ -103,7 +102,7 @@ def save_file_as():
         print("No text file selected")
 
     with open(opened_file_address, "w") as selected_file:
-        selected_file.write(text_field.get(1.0, END))
+        selected_file.write(text_field.get(1.0, "end"))
 
     display_file_address()
 
@@ -123,7 +122,7 @@ def clear_sidebar():
     sidebar_label = Label(
         sidebar_frame,
         text="Sidebar",
-        relief=FLAT,
+        relief="flat",
         width=20,
         bg=sidebar_color,
         fg="white",
@@ -131,7 +130,8 @@ def clear_sidebar():
     sidebar_label.pack(pady=2)
 
     sidebar_collapse_button = Button(sidebar_frame, text="<<", command=collapse_sidebar)
-    sidebar_collapse_button.pack(anchor=SW)
+    sidebar_collapse_button.pack(anchor="sw")
+
 
 # Close out the application.
 # ROOT.quit()
@@ -144,34 +144,34 @@ def exit():
 
 # Clears the text field
 def clear():
-    text_field.delete(1.0, END)
+    text_field.delete(1.0, "end")
 
 
 def open_settings():
     # Window Options
     settings_window = Toplevel()
-    settings_window.title('D-Pad Settings')
+    settings_window.title("D-Pad Settings")
 
     settings_window.minsize(200, 150)
     settings_window.minsize(250, 200)
 
     # Font selection
-    font_label = Label(settings_window, text='Select a Font: ')
-    font_label.pack(side=LEFT, anchor=W)
-    font_button = Button(settings_window, text='Font...', command=open_font_selector)
-    font_button.pack(side=LEFT, anchor=W)
+    font_label = Label(settings_window, text="Select a Font: ")
+    font_label.pack(side="left", anchor=W)
+    font_button = Button(settings_window, text="Font...", command=open_font_selector)
+    font_button.pack(side="left", anchor=W)
 
-    font_size_label = Label(settings_window, text='Set Font Size: ')
-    font_size_label.pack(side=LEFT, anchor=W)
+    font_size_label = Label(settings_window, text="Set Font Size: ")
+    font_size_label.pack(side="left", anchor=W)
 
     selected_font_size = StringVar()
     font_size_entry = Entry(settings_window, textvariable=selected_font_size)
-    font_size_entry.pack(side=LEFT, anchor=W)
+    font_size_entry.pack(side="left", anchor=W)
 
     def apply_font_size():
         text_field.config(font=(text_font, selected_font_size.get()))
 
-    apply_font_button = Button(settings_window, text='Okay', command=apply_font_size)
+    apply_font_button = Button(settings_window, text="Okay", command=apply_font_size)
     apply_font_button.pack(side=BOTTOM, anchor=SE)
 
 
@@ -189,7 +189,7 @@ def cut_text():
         selected_text = text_field.selection_get()
         ROOT.clipboard_clear()
         ROOT.clipboard_append(selected_text)
-        text_field.delete(SEL_FIRST, SEL_LAST)
+        text_field.delete("sel.first", "sel.last")
 
 
 # copy selected text
@@ -211,18 +211,18 @@ def paste_text():
 def text_bold():
     # Un-bold the text
     def remove_bold():
-        text_field.tag_remove("bold", SEL_FIRST, SEL_LAST)
+        text_field.tag_remove("bold", "sel.first", "sel.last")
 
     # Make the text bold.
     def add_bold():
-        text_field.tag_add("bold", SEL_FIRST, SEL_LAST)
+        text_field.tag_add("bold", "sel.first", "sel.last")
 
     bold_font = font.Font(text_field, text_field.cget("font"))
     bold_font.configure(weight="bold")
 
     text_field.tag_configure("bold", font=bold_font)
 
-    text_tags = text_field.tag_names(SEL_FIRST)
+    text_tags = text_field.tag_names("sel.first")
 
     # Check if the 'BOLD' tag is there
     if "bold" in text_tags:
@@ -233,17 +233,17 @@ def text_bold():
 
 def italicize():
     def remove_italics():
-        text_field.tag_remove("italic", SEL_FIRST, SEL_LAST)
+        text_field.tag_remove("italic", "sel.first", "sel.last")
 
     def add_italics():
-        text_field.tag_add("italic", SEL_FIRST, SEL_LAST)
+        text_field.tag_add("italic", "sel.first", "sel.last")
 
     italic_font = font.Font(text_field, text_field.cget("font"))
     italic_font.configure(slant="italic")
 
     text_field.tag_configure("italic", font=italic_font)
 
-    text_tags = text_field.tag_names(SEL_FIRST)
+    text_tags = text_field.tag_names("sel.first")
 
     if "italic" in text_tags:
         remove_italics()
@@ -253,17 +253,17 @@ def italicize():
 
 def underline_text():
     def add_underline():
-        text_field.tag_add("underline", SEL_FIRST, SEL_LAST)
+        text_field.tag_add("underline", "sel.first", "sel.last")
 
     def remove_underline():
-        text_field.tag_remove("underline", SEL_FIRST, SEL_LAST)
+        text_field.tag_remove("underline", "sel.first", "sel.last")
 
     under_text = font.Font(text_field, text_field.cget("font"))
     under_text.configure(underline=True)
 
     text_field.tag_configure("underline", font=under_text)
 
-    text_tags = text_field.tag_names(SEL_FIRST)
+    text_tags = text_field.tag_names("sel.first")
 
     if "underline" in text_tags:
         remove_underline()
@@ -272,24 +272,25 @@ def underline_text():
 
 
 def highlight_text():
-    highlight_color = '#FFFF00'
+    highlight_color = "#FFFF00"
 
     def add_highlight():
-        text_field.tag_add('highlight', SEL_FIRST, SEL_LAST)
+        text_field.tag_add("highlight", "sel.first", "sel.last")
 
     def remove_highlight():
-        text_field.tag_add('highlight', SEL_FIRST, SEL_LAST)
+        text_field.tag_remove("highlight", "sel.first", "sel.last")
 
-    highlighted_text = font.Font(text_field, text_field.cget('font'))
+    highlighted_text = font.Font(text_field, text_field.cget("font"))
 
-    text_field.tag_configure('highlight', font=highlighted_text)
-    text_field.tag_config('highlight', background=highlight_color, foreground="white")
-    text_tags = text_field.tag_names(SEL_FIRST)
+    text_field.tag_configure("highlight", font=highlighted_text)
+    text_field.tag_config("highlight", background=highlight_color, foreground="white")
+    text_tags = text_field.tag_names("sel.first")
 
-    if 'highlight' in text_tags:
+    if "highlight" in text_tags:
         remove_highlight()
     else:
         add_highlight()
+
 
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
@@ -318,7 +319,7 @@ def open_font_selector():
     selected_font = StringVar(font_window)
     # Set the first options as the initial menu for the dropdown.
     selected_font.set(available_fonts[0])
-    fonts_label = Label(font_window, text='Select a Font: ')
+    fonts_label = Label(font_window, text="Select a Font: ")
     fonts_label.pack()
     # Selector for fonts
     font_selection_drop = OptionMenu(font_window, selected_font, *available_fonts)
@@ -348,16 +349,16 @@ def collapse_sidebar():
 
 
 def show_sidebar():
-    sidebar_frame.pack(fill=Y, side=LEFT)
+    sidebar_frame.pack(fill=Y, side="left")
 
     titlebar_frame.pack_forget()
-    titlebar_frame.pack(side=TOP, fill="x")
+    titlebar_frame.pack(side="top", fill="x")
 
     topbar_frame.pack_forget()
-    topbar_frame.pack(side=TOP, fill=X)
+    topbar_frame.pack(side="top", fill=X)
 
     text_field_frame.pack_forget()
-    text_field_frame.pack(fill=BOTH)
+    text_field_frame.pack(fill="both")
 
 
 # endregion
@@ -397,7 +398,7 @@ if __name__ == "__main__":
     ROOT.title("D-Pad")
 
     # Runs program fullscreen
-    ROOT.state('zoomed')
+    ROOT.state("zoomed")
 
     # # Ading an icon
     # ROOT.iconbitmap("win-icon.ico")
@@ -408,22 +409,22 @@ if __name__ == "__main__":
 
     # Creating a Frame
     sidebar_frame = Frame(
-        ROOT, width=2400, bg=sidebar_color, relief=SUNKEN, borderwidth=4
+        ROOT, width=2400, bg=sidebar_color, relief="sunken", borderwidth=4
     )
     # Stretching the sidebar on Y-Axis
-    sidebar_frame.pack(side=LEFT, fill=BOTH)
+    sidebar_frame.pack(side="left", fill="both")
 
     # Title bar
-    titlebar_frame = Frame(ROOT, bg=sidebar_color, relief=FLAT)
-    titlebar_frame.pack(side=TOP, fill="x")
+    titlebar_frame = Frame(ROOT, bg=sidebar_color, relief="flat")
+    titlebar_frame.pack(side="top", fill="x")
 
     # Topbar
-    topbar_frame = Frame(ROOT, bg=topbar_color, relief=FLAT)
+    topbar_frame = Frame(ROOT, bg=topbar_color, relief="flat")
     # stretching the topbar on the X-Axis
-    topbar_frame.pack(side=TOP, fill="x")
+    topbar_frame.pack(side="top", fill="x")
 
     text_field_frame = Frame(ROOT)
-    text_field_frame.pack(fill=BOTH)
+    text_field_frame.pack(fill="both")
 
     # Text field.
     # Takes user input.
@@ -451,9 +452,11 @@ if __name__ == "__main__":
     file_menu.add_command(label="Save", command=save_file)
     file_menu.add_command(label="Save As..", command=save_file_as)
     file_menu.add_separator()
-    file_menu.add_command(label='Settings...', accelerator='Ctrl + ,', command=open_settings)
+    file_menu.add_command(
+        label="Settings...", accelerator="Ctrl + ,", command=open_settings
+    )
     file_menu.add_separator()
-    file_menu.add_command(label='Save & Exit', command=lambda: [save_file(), exit()])
+    file_menu.add_command(label="Save & Exit", command=lambda: [save_file(), exit()])
     file_menu.add_command(label="Exit", command=exit, accelerator="Ctrl+W")
 
     # Edit Menu
@@ -503,7 +506,7 @@ if __name__ == "__main__":
     sidebar_label = Label(
         sidebar_frame,
         text="Sidebar",
-        relief=FLAT,
+        relief="flat",
         width=20,
         bg=sidebar_color,
         fg="white",
@@ -514,11 +517,11 @@ if __name__ == "__main__":
         titlebar_frame,
         text="D-Pad | Text Editor",
         font=("abel", "12", "bold"),
-        relief=FLAT,
+        relief="flat",
         background=sidebar_color,
         fg=font_color,
     )
-    title_label.pack(pady=6, anchor=CENTER, fill="x")
+    title_label.pack(pady=6, anchor="center", fill="x")
 
     # Create a button to open file opener
     openfile_button = Button(
@@ -548,16 +551,16 @@ if __name__ == "__main__":
     )
     underline_button.grid(row=0, column=4)
 
-    highlight_button = Button(topbar_frame, text='Highlight', command=highlight_text)
+    highlight_button = Button(topbar_frame, text="Highlight", command=highlight_text)
     highlight_button.grid(row=0, column=5)
 
     sidebar_collapse_button = Button(sidebar_frame, text="<<", command=collapse_sidebar)
-    sidebar_collapse_button.pack(anchor=SW)
+    sidebar_collapse_button.pack(anchor="sw")
 
     # Store the input into the
     # text_field
     text_field_content = StringVar(ROOT)
-    text_field_content = text_field.get(1.0, END)
+    text_field_content = text_field.get(1.0, "end")
 
     # # Disable the save option
     # # Disable if the text field is empty.
