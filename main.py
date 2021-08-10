@@ -9,12 +9,14 @@
 
 
 """ Color Theme """
+
+
 from tkinter import *
 from tkinter import font
 from tkinter import filedialog
 import webbrowser
 import os
-
+from message import alert
 font_color = "#C5D4DD"
 # Color of the Sidebar
 sidebar_color = "#1E272C"
@@ -61,6 +63,7 @@ def open_fileopener():
                 text_field.insert("end", file_text)
         except Exception:
             print("Oops! There was a problem opening that file")
+            alert("Oops! There was a problem opening that file")
 
     if opened_file_address != "":
         global file_name
