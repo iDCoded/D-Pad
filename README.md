@@ -1,6 +1,6 @@
 ![win-icon](https://user-images.githubusercontent.com/65074550/126780766-e6465ac7-6968-4a55-9df4-8e4fbdb1acf4.png)
 
-# D-Pad
+<h1 align='center'> D-Pad </h1>
 
 <p align="center"> Lightweight Text Editor with minimal features.</p>
 <p align="center" > ⚠️ >>> 📣 This app is currently under active development <<< ⚠️</p>
