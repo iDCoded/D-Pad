@@ -2,14 +2,6 @@
 """ TKinter """
 """ By: Dhruv and ygz213"""
 
-# Importing module
-# TKinter
-
-# from tkinter.ttk import Style
-
-
-""" Color Theme """
-
 
 from tkinter import *
 from tkinter import font
@@ -562,16 +554,8 @@ if __name__ == "__main__":
 
     # Store the input into the
     # text_field
-    text_field_content = StringVar(ROOT)
+    text_field_content = StringVar()
     text_field_content = text_field.get(1.0, "end")
-
-    # # Disable the save option
-    # # Disable if the text field is empty.
-    # if text_field_content == "":
-    #     file_menu.entryconfig("Save", state="disabled")
-
-    # if text_field_content != "":
-    #     file_menu.entryconfig("Save", state="normal")
 
     # Running mainloop
     ROOT.mainloop()
