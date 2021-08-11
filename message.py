@@ -13,3 +13,4 @@ def info(info_text):
 
 if __name__ == '__main__':
     alert('Test')
+    info('Test')
