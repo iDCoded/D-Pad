@@ -31,6 +31,41 @@ opened_file_address = ""
 # List of all available fonts
 available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
 
+# Constants
+# -anchor and -sticky
+N = 'n'
+S = 's'
+W = 'w'
+E = 'e'
+NW = 'nw'
+SW = 'sw'
+NE = 'ne'
+SE = 'se'
+NS = 'ns'
+EW = 'ew'
+NSEW = 'nsew'
+CENTER = 'center'
+
+# -fill
+NONE = 'none'
+X = 'x'
+Y = 'y'
+BOTH = 'both'
+
+# -side
+LEFT = 'left'
+TOP = 'top'
+RIGHT = 'right'
+BOTTOM = 'bottom'
+
+# -relief
+RAISED = 'raised'
+SUNKEN = 'sunken'
+FLAT = 'flat'
+RIDGE = 'ridge'
+GROOVE = 'groove'
+SOLID = 'solid'
+
 # endregion
 
 """ Functions """
