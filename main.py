@@ -213,37 +213,9 @@ def open_settings():
 
 """ Text Operations """
 
-# Cut
-# Copy
-# Paste
-
-# cut selected text
-
-
-def cut_text():
-    if text_field.selection_get():
-        selected_text = text_field.selection_get()
-        ROOT.clipboard_clear()
-        ROOT.clipboard_append(selected_text)
-        text_field.delete("sel.first", "sel.last")
-
-
-# copy selected text
-def copy_text():
-    if text_field.selection_get():
-        selected_text = text_field.selection_get()
-        ROOT.clipboard_clear()
-        ROOT.clipboard_append(selected_text)
-
-
-# paste text
-def paste_text():
-    pasted_text = ROOT.clipboard_get()
-    text_position = text_field.index(INSERT)
-    text_field.insert(text_position, pasted_text)
-
-
 # Bold Format Option
+
+
 def text_bold():
     # Un-bold the text
     def remove_bold():
@@ -326,6 +298,33 @@ def highlight_text():
         remove_highlight()
     else:
         add_highlight()
+
+# Cut
+# Copy
+# Paste
+
+
+def cut_text():
+    if text_field.selection_get():
+        selected_text = text_field.selection_get()
+        ROOT.clipboard_clear()
+        ROOT.clipboard_append(selected_text)
+        text_field.delete("sel.first", "sel.last")
+
+
+# copy selected text
+def copy_text():
+    if text_field.selection_get():
+        selected_text = text_field.selection_get()
+        ROOT.clipboard_clear()
+        ROOT.clipboard_append(selected_text)
+
+
+# paste text
+def paste_text():
+    pasted_text = ROOT.clipboard_get()
+    text_position = text_field.index(INSERT)
+    text_field.insert(text_position, pasted_text)
 
 
 def change_font_color():
