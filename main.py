@@ -6,6 +6,7 @@
 from tkinter import *
 from tkinter import font
 from tkinter import filedialog
+from tkinter import colorchooser
 import webbrowser
 import os
 from message import alert
@@ -72,6 +73,11 @@ SOLID = 'solid'
 # region Functions
 
 #  Prompts the File Explorer to select a text file (*.txt)
+
+
+def new_file():
+    ROOT.title('Untitled | D-Pad')
+    text_field.delete(1.0, 'end')
 
 
 def open_fileopener():
@@ -322,6 +328,10 @@ def highlight_text():
         add_highlight()
 
 
+def change_font_color():
+    color_select = colorchooser.askcolor()
+    text_field.config(fg=color_select[1])
+
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
 
@@ -474,6 +484,7 @@ if __name__ == "__main__":
     # Open a file => open_fileopener()
     # Savve => save_file()
     # Exit => exit()
+    file_menu.add_command(label="New File", command=new_file, accelerator='Ctrl + N')
     file_menu.add_command(
         label="Open a file",
         command=lambda: [open_fileopener(), display_file_address()],
@@ -497,6 +508,7 @@ if __name__ == "__main__":
     edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
     edit_menu.add_separator()
     edit_menu.add_command(label="Font..", command=open_font_selector)
+    edit_menu.add_command(label='Color', command=change_font_color)
 
     view_menu = Menu(VIEW_MENU, tearoff=False)
     MAIN_MENU.add_cascade(label="View", menu=view_menu)
@@ -549,7 +561,7 @@ if __name__ == "__main__":
         font=("abel", "12", "bold"),
         relief="flat",
         background=sidebar_color,
-        fg=font_color,
+        foreground=font_color,
     )
     title_label.pack(pady=6, anchor="center", fill="x")
 
