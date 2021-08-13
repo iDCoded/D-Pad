@@ -441,13 +441,13 @@ if __name__ == "__main__":
     ROOT.minsize(180, 90)
 
     # Setting the title of the window.
-    ROOT.title("D-Pad")
+    ROOT.title(" D-Pad")
 
     # Runs program fullscreen
     ROOT.state("zoomed")
 
-    # # Ading an icon
-    # ROOT.iconbitmap("win-icon.ico")
+    # Adding an icon
+    ROOT.iconbitmap("win-icon.ico")
 
     # configuring the base color of the application
     # color => #333842
