@@ -10,6 +10,7 @@ from tkinter import colorchooser
 import webbrowser
 import os
 from message import alert
+
 font_color = "#C5D4DD"
 # Color of the Sidebar
 sidebar_color = "#1E272C"
@@ -34,38 +35,38 @@ available_fonts = ("Abel", "Andromeda", "Consolas", "Consequences", "Helvetica")
 
 # Constants
 # -anchor and -sticky
-N = 'n'
-S = 's'
-W = 'w'
-E = 'e'
-NW = 'nw'
-SW = 'sw'
-NE = 'ne'
-SE = 'se'
-NS = 'ns'
-EW = 'ew'
-NSEW = 'nsew'
-CENTER = 'center'
+N = "n"
+S = "s"
+W = "w"
+E = "e"
+NW = "nw"
+SW = "sw"
+NE = "ne"
+SE = "se"
+NS = "ns"
+EW = "ew"
+NSEW = "nsew"
+CENTER = "center"
 
 # -fill
-NONE = 'none'
-X = 'x'
-Y = 'y'
-BOTH = 'both'
+NONE = "none"
+X = "x"
+Y = "y"
+BOTH = "both"
 
 # -side
-LEFT = 'left'
-TOP = 'top'
-RIGHT = 'right'
-BOTTOM = 'bottom'
+LEFT = "left"
+TOP = "top"
+RIGHT = "right"
+BOTTOM = "bottom"
 
 # -relief
-RAISED = 'raised'
-SUNKEN = 'sunken'
-FLAT = 'flat'
-RIDGE = 'ridge'
-GROOVE = 'groove'
-SOLID = 'solid'
+RAISED = "raised"
+SUNKEN = "sunken"
+FLAT = "flat"
+RIDGE = "ridge"
+GROOVE = "groove"
+SOLID = "solid"
 
 # endregion
 
@@ -76,8 +77,8 @@ SOLID = 'solid'
 
 
 def new_file():
-    ROOT.title('Untitled | D-Pad')
-    text_field.delete(1.0, 'end')
+    ROOT.title("Untitled | D-Pad")
+    text_field.delete(1.0, "end")
 
 
 def open_fileopener():
@@ -299,6 +300,7 @@ def highlight_text():
     else:
         add_highlight()
 
+
 # Cut
 # Copy
 # Paste
@@ -331,6 +333,7 @@ def change_font_color():
     color_select = colorchooser.askcolor()
     text_field.config(fg=color_select[1])
 
+
 # Open the repository page
 # Link: [https://github.com/iDCoded/D-Pad]
 
@@ -345,8 +348,7 @@ def open_font_selector():
     global text_font
 
     def select_font():
-        text_font = selected_font.get()
-        text_field.config(font=(text_font))
+        text_field.config(font=(selected_font.get()))
 
     font_window = Toplevel()
     font_window.title("Font")
@@ -361,8 +363,13 @@ def open_font_selector():
     fonts_label = Label(font_window, text="Select a Font: ")
     fonts_label.pack()
     # Selector for fonts
-    font_selection_drop = OptionMenu(font_window, selected_font, *available_fonts)
-    font_selection_drop.pack()
+    # font_selection_drop = OptionMenu(font_window, selected_font, *available_fonts)
+    # font_selection_drop.pack()
+
+    fontbox = OptionMenu(
+        font_window, selected_font, *font.families(), command=select_font
+    )
+    fontbox.pack()
 
     text_font = selected_font.get()
 
@@ -483,7 +490,7 @@ if __name__ == "__main__":
     # Open a file => open_fileopener()
     # Savve => save_file()
     # Exit => exit()
-    file_menu.add_command(label="New File", command=new_file, accelerator='Ctrl + N')
+    file_menu.add_command(label="New File", command=new_file, accelerator="Ctrl + N")
     file_menu.add_command(
         label="Open a file",
         command=lambda: [open_fileopener(), display_file_address()],
@@ -507,7 +514,7 @@ if __name__ == "__main__":
     edit_menu.add_command(label="Paste", command=paste_text, accelerator="Ctrl + V")
     edit_menu.add_separator()
     edit_menu.add_command(label="Font..", command=open_font_selector)
-    edit_menu.add_command(label='Color', command=change_font_color)
+    edit_menu.add_command(label="Color", command=change_font_color)
 
     view_menu = Menu(VIEW_MENU, tearoff=False)
     MAIN_MENU.add_cascade(label="View", menu=view_menu)
