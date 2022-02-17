@@ -3,7 +3,7 @@
 <h1 align='center'> D-Pad </h1>
 
 <p align="center"> Lightweight Text Editor with minimal features.</p>
-<p align="center" > ⚠️ >>> 📣 This app is currently under active development <<< ⚠️</p>
+<p align="center" > ⚠️ >>> 📣 This app is not being developed <<< ⚠️</p>
 
 ## Why do you need this?
  
